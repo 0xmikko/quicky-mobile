@@ -44,6 +44,19 @@ export const updateProfile: (
   opHash,
 });
 
+export const setQBToken: (
+    qbtoken: string,
+    opHash?: string,
+) => SocketEmitAction = (qbtoken, opHash) => ({
+  type: 'SOCKET_EMIT',
+  namespace,
+  event: 'profile:setQBToken',
+  typeOnFailure: 'PROFILE_FAILURE',
+  payload: qbtoken,
+  opHash,
+});
+
+
 export const addContract: (id: string, opHash?: string) => SocketEmitAction = (
   id,
   opHash,

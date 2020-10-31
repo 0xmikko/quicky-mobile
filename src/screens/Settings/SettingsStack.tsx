@@ -12,6 +12,9 @@ import {useDispatch} from 'react-redux';
 import actions from '../../store/actions';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 import {largeTitleStyles} from '../../../styles';
+import {ChangeQBTokenScreen} from './ChangeQBToken';
+import {SettingsNewAppScreen} from './SettingsAppsListScreen';
+import {useNavigation} from '@react-navigation/native';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +24,8 @@ export type SettingsStackParamList = {
 
 export const SettingsStack: React.FC = () => {
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -45,9 +50,39 @@ export const SettingsStack: React.FC = () => {
           title: 'Changing name',
         }}
       />
-      <Stack.Screen name="WebAuthQRScreen" component={WebAuthQRScanScreen}  options={{
-          title: 'Buzzchat Web',
-      }}/>
+      <Stack.Screen
+        name="ChangeQBTokenScreen"
+        component={ChangeQBTokenScreen}
+        options={{
+          title: 'QuickBase token',
+        }}
+      />
+      <Stack.Screen
+        name="SettingsAppsListScreen"
+        component={SettingsNewAppScreen}
+        options={{
+          title: 'Apps',
+          headerRight: () => (
+            <Button
+              onPress={() => navigation.navigate('SettingsNewApp')}
+              icon={{
+                name: 'add',
+                size: 22,
+                color: '#0873eb',
+              }}
+              type="clear"
+            />
+          ),
+          ...largeTitleStyles,
+        }}
+      />
+      <Stack.Screen
+        name="WebAuthQRScreen"
+        component={WebAuthQRScanScreen}
+        options={{
+          title: 'Connect Web',
+        }}
+      />
     </Stack.Navigator>
   );
 };

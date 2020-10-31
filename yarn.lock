@@ -6941,10 +6941,10 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-mobile-components@^1.0.21:
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/rn-mobile-components/-/rn-mobile-components-1.0.21.tgz#508b48826f30058ed8026e8a9285b85beb4018bd"
-  integrity sha512-VCoTO8Yy9BbD88ejztYs23tNvxZq1tw96VB8VpAmzXaFdB1KJsVWNL9qavLOE3Q0BGmDivUkeXFj9X/C/eXS+g==
+rn-mobile-components@^1.0.27:
+  version "1.0.27"
+  resolved "https://registry.yarnpkg.com/rn-mobile-components/-/rn-mobile-components-1.0.27.tgz#2ec7824c6f8c771ebaac3636224d705c6bf25545"
+  integrity sha512-TyuL0hUjRtKyMGGRGFvMT+5bnUDqgrEqV4nvGiatM9/5v0foGif39cm5tERcaRbhrYfHCNyCIvpqz9LxpEXKmA==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.10.4"
     formik "^2.1.4"

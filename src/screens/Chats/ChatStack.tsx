@@ -22,7 +22,6 @@ export type ChatsStackParamList = {
 };
 
 export const ChatStack: React.FC = () => {
-  const navigation = useNavigation();
 
   return (
     <Stack.Navigator>
@@ -31,17 +30,7 @@ export const ChatStack: React.FC = () => {
       {/*  component={ChatsListScreen}*/}
       {/*  options={{*/}
       {/*    title: 'Chats',*/}
-      {/*    headerRight: () => (*/}
-      {/*      <Button*/}
-      {/*        onPress={() => navigation.navigate('ChatNew')}*/}
-      {/*        icon={{*/}
-      {/*          name: 'add',*/}
-      {/*          size: 22,*/}
-      {/*          color: '#0873eb',*/}
-      {/*        }}*/}
-      {/*        type="clear"*/}
-      {/*      />*/}
-      {/*    ),*/}
+
       {/*    ...largeTitleStyles,*/}
       {/*  }}*/}
       {/*/>*/}

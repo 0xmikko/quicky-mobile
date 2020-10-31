@@ -11,10 +11,7 @@ const initialState: ProfileState = {
   id: '',
   name: 'Loading',
   avatar: '',
-  chats: [],
-  contacts: [],
-  account: '-',
-  amount: '-',
+  isQBTokenEntered: false
 };
 
 

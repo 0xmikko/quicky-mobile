@@ -21,17 +21,15 @@ export const ProfileDetails: React.FC<ProfileDetailsProps> = ({data}) => {
       icon: 'edit',
       action: () => navigation.navigate('ChangeNameScreen', {data}),
     },
-    // {
-    //   title: 'Change avatar',
-    //   icon: 'camera',
-    //   action: () => {
-    //     console.log('QQ');
-    //   },
-    // },
     {
-      title: 'Connect web',
+      title: 'Change QuickBaset token',
       icon: 'desktop-windows',
-      action: () => navigation.navigate('WebAuthQRScreen'),
+      action: () => navigation.navigate('ChangeQBTokenScreen', {data}),
+    },
+    {
+      title: 'Connect app',
+      icon: 'desktop-windows',
+      action: () => navigation.navigate('SettingsAppsListScreen'),
     },
   ];
 
@@ -48,8 +46,7 @@ export const ProfileDetails: React.FC<ProfileDetailsProps> = ({data}) => {
             alignContent: 'center',
             alignItems: 'center',
           }}>
-          <Text h4>Contacts: {data.contacts.length}</Text>
-          <Text h4>Chats: {data.chats.length}</Text>
+          <Text h4>QuickBase is {data.isQBTokenEntered ? "connected" : "not connected"}</Text>
         </View>
       </View>
       <View>

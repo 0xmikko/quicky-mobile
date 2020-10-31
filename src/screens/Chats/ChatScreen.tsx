@@ -62,15 +62,15 @@ export function ChatScreen(): React.ReactElement {
           {
             text: 'Delete Message',
             style: 'destructive',
-            onPress: () =>
-              dispatch(
-                actions.chats.deleteMessage(
-                  {
-                    msgId: msg._id.toString(),
-                  },
-                  'delete',
-                ),
-              ),
+            // onPress: () =>
+              // dispatch(
+              //   actions.chats.deleteMessage(
+              //     {
+              //       msgId: msg._id.toString(),
+              //     },
+              //     'delete',
+              //   ),
+              // ),
           },
           {
             text: 'Cancel',

@@ -3,6 +3,7 @@
  */
 
 import * as auth from './auth/actions';
+import * as apps from './apps/actions';
 import * as chats from './chat/actions';
 import * as contacts from './contacts/actions';
 import * as profile from './profile/actions';
@@ -13,6 +14,7 @@ import {Action} from 'redux';
 
 export default {
   auth,
+  apps,
   chats,
   contacts,
   profile,
@@ -30,6 +32,7 @@ export const actionsAfterAuth = (): ThunkAction<
   dispatch(profile.connectSocket());
   dispatch(profile.getProfile('actionsAfterAuth'));
   dispatch(operations.connectSocket());
+  dispatch(apps.connectSocket());
   dispatch(chats.connectSocket());
   dispatch(contacts.connectSocket());
 
