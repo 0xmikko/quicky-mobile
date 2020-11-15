@@ -7,6 +7,9 @@ target 'mobile' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
+  permissions_path = '../node_modules/react-native-permissions/ios'
+
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera.podspec"
 
   target 'mobileTests' do
     inherit! :complete
@@ -20,14 +23,5 @@ target 'mobile' do
   use_flipper!
   post_install do |installer|
     flipper_post_install(installer)
-  end
-end
-
-target 'mobile-tvOS' do
-  # Pods for mobile-tvOS
-
-  target 'mobile-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
   end
 end

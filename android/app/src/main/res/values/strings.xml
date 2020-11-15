@@ -1,3 +1,7 @@
+<!--
+  ~ Copyright (c) 2020. Mikhail Lazarev
+  -->
+
 <resources>
-    <string name="app_name">mobile</string>
+    <string name="app_name">Quicky</string>
 </resources>
