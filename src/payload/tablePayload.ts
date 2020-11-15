@@ -2,7 +2,7 @@
  * Copyright (c) 2020. Mikhail Lazarev
  */
 
-import {IsDateString, IsNotEmpty, IsString} from "class-validator";
+import {IsDateString, IsNotEmpty, IsString} from 'class-validator';
 
 export class TablePayload {
   @IsNotEmpty()
@@ -28,5 +28,4 @@ export class TablePayload {
 
   @IsDateString()
   updated: Date;
-
 }

@@ -3,8 +3,6 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Button, Text} from 'react-native-elements';
 import QRCodeScanner, {Event} from 'react-native-qrcode-scanner';
 import {useDispatch} from 'react-redux';
 import actions from '../../store/actions';
@@ -22,27 +20,6 @@ export function QRScanScreen(): React.ReactElement {
   };
   return (
     // <Text>Hello!</Text>
-    <QRCodeScanner
-      onRead={onSuccess}
-      topContent={
-        <View style={styles.container}>
-          <Text>Scan QR-code or enter contact automatically.</Text>
-        </View>
-      }
-      bottomContent={
-        <View style={styles.container}>
-          <Button title="Scan QR-Code" />
-        </View>
-      }
-    />
+    <QRCodeScanner onRead={onSuccess} />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    paddingLeft: 15,
-    paddingRight: 15,
-    paddingTop: 5,
-    width: '100%',
-  },
-});

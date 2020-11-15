@@ -39,7 +39,7 @@ export function SplashScreen(): React.ReactElement {
       <View style={{...styles.button, paddingTop: 50}}>
         <Button
           title="Scan QR code"
-          onPress={() => navigation.navigate('QrScanScreen')}
+          onPress={() => navigation.navigate('QRScanScreen')}
           // type="outline"
           buttonStyle={{borderColor: '#FFF', backgroundColor: '#EEE'}}
           titleStyle={{color: '#763e9a'}}

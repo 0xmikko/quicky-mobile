@@ -23,7 +23,7 @@ export function WelcomeStack(): React.ReactElement {
         name="QRScanScreen"
         component={QRScanScreen}
         options={{
-          headerShown: false,
+          title: 'Scan QR Code',
         }}
       />
     </Stack.Navigator>
