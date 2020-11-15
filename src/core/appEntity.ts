@@ -2,28 +2,27 @@
  * Copyright (c) 2020, Mikael Lazarev
  */
 
-import {Field} from "./field";
-import {EntityType} from "./types";
+import {Field} from './field';
+import {EntityType} from './types';
 
 export interface AppEntity {
+  appId: string;
 
-    appId: string
+  tableId: string;
 
-    tableId: string;
+  name: string;
 
-    name: string;
+  icon: string;
 
-    icon: string;
+  type: EntityType;
 
-    type: EntityType;
+  order: number;
 
-    order: number;
+  // schema: Record<string, Field>;
 
-    // schema: Record<string, Field>;
+  additionalFields: Array<string>;
 
-    additionalFields: Array<string>;
+  isDeployed: boolean;
 
-    isDeployed: boolean;
-
-    dataMapper: Record<string, Field>;
+  dataMapper: Record<string, Field>;
 }

@@ -6822,13 +6822,15 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-mobile-components@^1.0.21:
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/rn-mobile-components/-/rn-mobile-components-1.0.21.tgz#508b48826f30058ed8026e8a9285b85beb4018bd"
-  integrity sha512-VCoTO8Yy9BbD88ejztYs23tNvxZq1tw96VB8VpAmzXaFdB1KJsVWNL9qavLOE3Q0BGmDivUkeXFj9X/C/eXS+g==
+rn-mobile-components@^1.0.33:
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/rn-mobile-components/-/rn-mobile-components-1.0.33.tgz#8d0adeddeff632bab89257673d5fe5a70389c5f1"
+  integrity sha512-u9Q3GCAp9d2AwMeu1en5syLahhNNHcQ4ZduuL8daA9dKVqI1tnmR7kiuS5P3B65XjIYEVxHi8DlYQifHzPMmOw==
   dependencies:
     "@babel/plugin-transform-react-jsx" "^7.10.4"
+    "@types/react-redux" "^7.1.9"
     formik "^2.1.4"
+    react-redux "^7.2.2"
     redux-data-connect "^1.1.6"
     yup "^0.28.4"
 

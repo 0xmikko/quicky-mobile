@@ -8,50 +8,95 @@ import {createAction} from 'redux-api-middleware';
 import {RootState} from '../index';
 import {SSO_ADDR} from '../../../config';
 import AsyncStorage from '@react-native-community/async-storage';
-import {
-  createGetTokenAtStartupAction,
-  createLogoutAction,
-  journaledOperation,
-  withAuth,
-  getFullUrl,
-} from 'redux-data-connect';
-import {
-  createGetCodeAction,
-  createLoginByPhoneAction,
-} from 'redux-data-connect/lib/auth/actions';
+import {getFullUrl, journaledOperation, withAuth} from 'redux-data-connect';
+import {AuthAction} from './index';
+import {transformAndValidate} from 'class-transformer-validator';
+import {App, AppDeploymentData} from '../../core/app';
+import {QuickbaseRepository} from '../quickbase/api';
+import {updateApp} from '../app/actions';
 
-// Persistence management
-const tokenPersistenceGetter = async () => {
-  const token = await AsyncStorage.getItem('token');
-  return token;
-};
-const tokenPersistenceSetter = async (token: string) => {
-  await AsyncStorage.setItem('token', token);
-};
+export function authCredential(
+  data: AppDeploymentData,
+): ThunkAction<void, RootState, unknown, Action<string>> {
+  return async (dispatch) => {
+    try {
+      const authDataJSON = JSON.stringify(data);
+      await AsyncStorage.setItem('token', authDataJSON);
 
-const localDataPersistenceCleaner = async () => await AsyncStorage.clear();
+      const tables = await QuickbaseRepository.getTables(
+        data.appId,
+        data.hostName,
+        data.token,
+      );
 
-// Login actions
-export const getCode = createGetCodeAction(
-  getFullUrl('/auth/phone/get_code/', {host: SSO_ADDR}),
-);
-export const loginByPhone = createLoginByPhoneAction(
-  getFullUrl('/auth/phone/login/', {
-    host: SSO_ADDR,
-  }),
-  tokenPersistenceSetter,
-);
+      console.log(tables);
+
+      const settingsTable = tables.filter((t) => t.name === 'Settings');
+      if (settingsTable.length === 0) {
+        throw new Error('No settings table was found');
+      }
+
+      const settingsTableId = settingsTable[0].id;
+
+      console.log(settingsTableId);
+
+      const records = await QuickbaseRepository.getRecords(
+        settingsTableId,
+        data.hostName,
+        data.token,
+        [1, 2, 3, 4, 5, 6],
+      );
+
+      console.log(records);
+
+      if (records.data.length === 0)
+        throw new Error('No settings was found in Settings Table');
+
+      const appValueJSON = records.data[0][6].value as string;
+      const app = (await transformAndValidate(App, appValueJSON)) as App;
+
+      console.log(app);
+
+      dispatch(updateApp(app));
+      dispatch({
+        type: 'AUTH_SUCCESS',
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: 'AUTH_FAILURE',
+        error,
+      });
+    }
+  };
+}
 
 // Startup actions
-export const getTokenAtStartup = createGetTokenAtStartupAction(
-  getFullUrl('/auth/token/refresh/', {
-    host: SSO_ADDR,
-  }),
-  tokenPersistenceGetter,
-);
+export const getTokenAtStartup = (): ThunkAction<
+  void,
+  RootState,
+  unknown,
+  AuthAction
+> => async (dispatch) => {
+  const authData = await AsyncStorage.getItem('token');
 
-// Logout action
-const logoutAction = createLogoutAction(localDataPersistenceCleaner);
+  try {
+    if (!authData) {
+      throw new Error('No auth data stored');
+    }
+
+    const appDeploymentData = (await transformAndValidate(
+      AppDeploymentData,
+      authData,
+    )) as AppDeploymentData;
+    dispatch(authCredential(appDeploymentData));
+  } catch (error) {
+    dispatch({
+      type: 'AUTH_FAILURE',
+      error,
+    });
+  }
+};
 
 export const logout = (): ThunkAction<
   void,
@@ -61,9 +106,9 @@ export const logout = (): ThunkAction<
 > => async (dispatch) => {
   // Clear local storage at logout
 
-  dispatch(logoutAction());
+  await AsyncStorage.clear();
   dispatch({
-    type: 'SOCKET_OFF',
+    type: 'AUTH_LOGOUT',
   });
 };
 

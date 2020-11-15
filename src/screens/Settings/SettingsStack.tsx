@@ -5,12 +5,11 @@
 import React from 'react';
 import {Profile} from '../../core/profile';
 import {SettingsScreen} from './SettingsScreen';
-import {ChangeNameScreen} from './ChangeNameScreen';
 import {Button} from 'react-native-elements';
 import {useDispatch} from 'react-redux';
 import actions from '../../store/actions';
 import {createNativeStackNavigator} from 'react-native-screens/native-stack';
-import {largeTitleStyles} from '../../../styles';
+import {largeTitleStyles} from '../../styles';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,13 +34,6 @@ export const SettingsStack: React.FC = () => {
             />
           ),
           ...largeTitleStyles,
-        }}
-      />
-      <Stack.Screen
-        name="ChangeNameScreen"
-        component={ChangeNameScreen}
-        options={{
-          title: 'Changing name',
         }}
       />
     </Stack.Navigator>

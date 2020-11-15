@@ -70,7 +70,7 @@ export class QuickbaseRepository {
     hostname: string,
     token: string,
     fields: Array<number>,
-    query: string,
+    query?: string,
   ): Promise<RecordsPayload> {
     const fieldsDataRaw = await QuickbaseRepository.post(
       '/records/query',

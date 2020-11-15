@@ -2,23 +2,14 @@
  * Copyright (c) 2020, Mikael Lazarev
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {appSelector} from '../store/app';
-import actions from '../store/actions';
 import {LoadingView} from 'rn-mobile-components';
 import {SplashScreen} from './Welcome/SplashScreen';
 import {TabBar} from '../components/TabBar';
 
-export function WebRouter(): React.ReactElement {
-  const [hash, setHash] = useState('0');
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const newHash = Date.now().toString();
-    dispatch(actions.app.getDetails(newHash));
-    setHash(newHash);
-  }, []);
+export function Router(): React.ReactElement {
 
   const app = useSelector(appSelector);
 

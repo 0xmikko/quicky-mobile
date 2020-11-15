@@ -3,18 +3,19 @@
  */
 
 import React, {useEffect} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
 import {DMListScreen} from '../containers/DataScreens/DMListScreen';
 import {EntityType} from '../core/types';
 import {DMDetailsScreen} from '../containers/DataScreens/DMDetailsScreen';
 import {useSelector} from 'react-redux';
 import {appSelector} from '../store/app';
 import {useNavigation} from '@react-navigation/native';
+import {largeTitleStyles} from '../styles';
+import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 
 export function createEntityStack(
   entityType: EntityType,
 ): () => React.ReactElement {
-  const Stack = createStackNavigator();
+  const Stack = createNativeStackNavigator();
   return () => {
     const app = useSelector(appSelector);
     const screen = app.screen as EntityType;
@@ -40,7 +41,8 @@ export function createEntityStack(
           name={`${entityType}sListScreen`}
           component={() => <DMListScreen type={entityType} />}
           options={{
-            header: () => null,
+            title: entityType,
+            ...largeTitleStyles,
           }}
         />
         <Stack.Screen
@@ -48,6 +50,7 @@ export function createEntityStack(
           component={() => <DMDetailsScreen type={entityType} />}
           options={{
             title: `${entityType}s`,
+            ...largeTitleStyles,
           }}
         />
       </Stack.Navigator>

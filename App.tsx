@@ -10,10 +10,12 @@ import {ThemeProvider} from 'react-native-elements';
 import {theme} from './src/styles';
 import {AuthSwitcher} from './src/screens/AuthSwitcher';
 import {NavigationContainer} from '@react-navigation/native';
+import {enableScreens} from 'react-native-screens';
 
 // declare const global: {HermesInternal: null | {}};
 
 const store = configureStore();
+enableScreens();
 
 const App = () => {
   return (

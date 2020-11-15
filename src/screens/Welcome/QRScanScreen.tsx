@@ -3,23 +3,31 @@
  */
 
 import React from 'react';
-import QRCodeScanner, {Event} from 'react-native-qrcode-scanner';
+import {Alert} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {transformAndValidate} from 'class-transformer-validator';
+import QRCodeScanner, {Event} from 'react-native-qrcode-scanner';
+
 import actions from '../../store/actions';
-import {useNavigation} from '@react-navigation/native';
+
+import {AppDeploymentData} from '../../core/app';
 
 export function QRScanScreen(): React.ReactElement {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
-  const onSuccess = (e: Event) => {
+  const onSuccess = async (e: Event) => {
     const qrcode = e.data as string;
-    const newHash = Date.now().toString();
-    dispatch(actions.auth.authWeb(qrcode, newHash));
-    navigation.navigate('SettingsScreen');
+    try {
+      const authData = (await transformAndValidate(
+        AppDeploymentData,
+        qrcode,
+      )) as AppDeploymentData;
+
+      console.log(authData);
+      dispatch(actions.auth.authCredential(authData));
+    } catch (e) {
+      Alert.alert('Error', e);
+    }
   };
-  return (
-    // <Text>Hello!</Text>
-    <QRCodeScanner onRead={onSuccess} />
-  );
+  return <QRCodeScanner onRead={onSuccess} />;
 }

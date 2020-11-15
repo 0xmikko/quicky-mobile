@@ -8,12 +8,11 @@ import {useNavigation} from '@react-navigation/native';
 import {DataListView} from 'rn-mobile-components/lib/DataListView';
 import {SafeAreaView, View} from 'react-native';
 import {commonStyles} from '../../styles';
-import {SearchBar, Text} from 'react-native-elements';
+import SearchBar from 'react-native-search-bar';
 import {AppDataManager} from '../../core/dataManager';
-import {DMDataScreenProps} from "./types";
+import {DMDataScreenProps} from './types';
 
-
-export function DMListScreen({type} : DMDataScreenProps): React.ReactElement {
+export function DMListScreen({type}: DMDataScreenProps): React.ReactElement {
   const navigation = useNavigation();
 
   const dispatch = useDispatch();
@@ -22,10 +21,7 @@ export function DMListScreen({type} : DMDataScreenProps): React.ReactElement {
 
   const [search, setSearch] = useState('');
 
-  const filteredData =
-      search === ''
-          ? data
-          : dataManager.search(data, search);
+  const filteredData = search === '' ? data : dataManager.search(data, search);
 
   const getList = (opHash: string) => {
     dispatch(dataManager.getListAction(opHash));
@@ -36,26 +32,21 @@ export function DMListScreen({type} : DMDataScreenProps): React.ReactElement {
   };
 
   return (
-      <SafeAreaView style={commonStyles.safeAreaContainer}>
-        <View>
-          <Text h1>Contacts</Text>
-        </View>
+    <SafeAreaView style={commonStyles.safeAreaContainer}>
+      <View style={{width: '100%'}}>
         <SearchBar
-            placeholder="Type Here..."
-            onChangeText={setSearch}
-            value={search}
-            lightTheme={true}
-            round={true}
-            // containerStyle={{backgroundColor: 'red'}}
-            // text={search}
-            // searchBarStyle={'minimal'}
+          placeholder="Type Here..."
+          onChangeText={setSearch}
+          text={search}
+          searchBarStyle={'minimal'}
         />
         <DataListView
-            data={filteredData || []}
-            getList={getList}
-            renderItem={dataManager.getListItemComponent()}
-            onSelect={onSelect}
+          data={filteredData || []}
+          getList={getList}
+          renderItem={dataManager.getListItemComponent()}
+          onSelect={onSelect}
         />
-      </SafeAreaView>
+      </View>
+    </SafeAreaView>
   );
 }

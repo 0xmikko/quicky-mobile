@@ -6,15 +6,13 @@ import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {WelcomeStack} from './Welcome/WelcomeStack';
 
-import actions, {actionsAfterAuth} from '../store/actions';
+import actions from '../store/actions';
 import {Router} from './Router';
-import {authSelector, isAuthenticatedSelector} from 'redux-data-connect';
 import {LoadingView} from 'rn-mobile-components';
-import {Text} from "react-native";
+import {authSelector} from '../store/auth';
 
-export const AuthSwitcher: React.FC = () => {
+export function AuthSwitcher(): React.ReactElement {
   const {status} = useSelector(authSelector);
-  const isUserAuthenticated = useSelector(isAuthenticatedSelector);
 
   const dispatch = useDispatch();
 
@@ -28,7 +26,6 @@ export const AuthSwitcher: React.FC = () => {
         dispatch(actions.auth.getTokenAtStartup());
         break;
       case 'AUTH_SUCCESS':
-        dispatch(actionsAfterAuth());
         break;
     }
   }, [status]);
@@ -38,11 +35,8 @@ export const AuthSwitcher: React.FC = () => {
     case 'AUTH_STARTUP':
       return <LoadingView />;
     case 'AUTH_REQUIRED':
+      return <WelcomeStack />;
     case 'AUTH_SUCCESS':
-      if (!isUserAuthenticated) {
-        return <WelcomeStack />;
-      }
-
-      return <Router />
+      return <Router />;
   }
-};
+}

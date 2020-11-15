@@ -6,7 +6,7 @@ import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Avatar, Text} from 'react-native-elements';
 import {Contact} from '../../entities/contact';
-import {ListItemComponentProps} from "../../core/types";
+import {ListItemComponentProps} from '../../core/types';
 
 export function ContactListItem({
   data,
@@ -22,10 +22,10 @@ export function ContactListItem({
         <View>
           <View style={{paddingTop: 3}}>
             <Avatar
-                title={data.firstName.slice(0, 1) + data.lastName.slice(0, 1)}
-                size={'medium'}
-                containerStyle={{backgroundColor: '#999999'}}
-                rounded
+              title={data.firstName.slice(0, 1) + data.lastName.slice(0, 1)}
+              size={'medium'}
+              containerStyle={{backgroundColor: '#999999'}}
+              rounded
             />
           </View>
         </View>

@@ -4,7 +4,7 @@
 
 import {AppEntity} from './appEntity';
 
-export interface App {
+export class App {
   id: string;
 
   qbAppId: string;
@@ -23,4 +23,10 @@ export interface App {
   splashBackground: string;
 
   entities: Array<AppEntity>;
+}
+
+export class AppDeploymentData {
+  appId: string;
+  hostName: string;
+  token: string;
 }

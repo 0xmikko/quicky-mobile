@@ -13,18 +13,16 @@ interface DataListItemProps {
 }
 
 export function DataListItem({
-  name, value,
+  name,
+  value,
   onSelect,
 }: DataListItemProps): React.ReactElement {
-
   return (
-    <TouchableOpacity
-      onPress={onSelect}
-      style={{marginTop: -1}}>
+    <TouchableOpacity onPress={onSelect} style={{marginTop: -1}}>
       <View style={styles.container}>
         <View style={styles.textContainer}>
-          <View >
-            <Text >{name}</Text>
+          <View>
+            <Text>{name}</Text>
             <Text h4>{value}</Text>
           </View>
         </View>

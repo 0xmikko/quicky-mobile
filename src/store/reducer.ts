@@ -3,8 +3,9 @@
  */
 
 import {combineReducers} from 'redux';
-import {authReducer, operationReducer} from 'redux-data-connect';
+import {operationReducer} from 'redux-data-connect';
 import app from './app/reducer';
+import auth from './auth/reducer';
 import {entityTypesList} from '../core/types';
 import {AppDataManager} from '../core/dataManager';
 
@@ -16,7 +17,7 @@ entityTypesList.forEach((t) => {
 });
 
 export default combineReducers({
-  auth: authReducer,
+  auth,
   app,
   operations: operationReducer,
   ...dataManagerReducers,

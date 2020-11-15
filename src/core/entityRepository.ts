@@ -58,7 +58,7 @@ export class EntityRepository<T extends DataObjectWithID> {
     return async (dispatch, getState) => {
       const app = getState().app;
       const entity = app.entitiesMap[this._type];
-      const {hostName, qbToken} = getState().profile;
+      const {hostName, token} = getState().auth;
 
       if (!entity.isDeployed) {
         dispatch({
@@ -76,14 +76,14 @@ export class EntityRepository<T extends DataObjectWithID> {
         );
         return;
       }
-      if (qbToken === undefined) {
+      if (token === undefined) {
         dispatch(
           updateStatus(opHash, 'STATUS.FAILURE', 'User token is not set'),
         );
         return;
       }
 
-      const resultValidated = await this._getRecords(entity, hostName, qbToken);
+      const resultValidated = await this._getRecords(entity, hostName, token);
 
       dispatch({
         type: this.prefix + LIST_SUCCESS,
@@ -104,7 +104,7 @@ export class EntityRepository<T extends DataObjectWithID> {
   ): ThunkAction<void, RootState, unknown, Action<string>> {
     return async (dispatch, getState) => {
       const app = getState().app;
-      const {hostName, qbToken} = getState().profile;
+      const {hostName, token} = getState().auth;
       const entity = app.entitiesMap[this._type];
 
       if (!entity.isDeployed) {
@@ -122,7 +122,7 @@ export class EntityRepository<T extends DataObjectWithID> {
         );
         return;
       }
-      if (qbToken === undefined) {
+      if (token === undefined) {
         dispatch(
           updateStatus(opHash, 'STATUS.FAILURE', 'User token is not set'),
         );
@@ -131,23 +131,25 @@ export class EntityRepository<T extends DataObjectWithID> {
 
       const singleQuery = `<rid>1</rid>`;
 
-      const resultValidated = await this._getRecords(entity, hostName, qbToken, singleQuery);
+      const resultValidated = await this._getRecords(
+        entity,
+        hostName,
+        token,
+        singleQuery,
+      );
 
-      console.log("RVR", resultValidated)
+      console.log('RVR', resultValidated);
 
       if (resultValidated.length === 0) {
-          dispatch(
-              updateStatus(opHash, 'STATUS.FAILURE', 'Item not found'),
-          );
-          return;
+        dispatch(updateStatus(opHash, 'STATUS.FAILURE', 'Item not found'));
+        return;
       }
 
-        dispatch({
-            type: this.prefix + DETAIL_SUCCESS,
-            payload: resultValidated[0],
-        });
-        dispatch(updateStatus(opHash, 'STATUS.SUCCESS'));
-
+      dispatch({
+        type: this.prefix + DETAIL_SUCCESS,
+        payload: resultValidated[0],
+      });
+      dispatch(updateStatus(opHash, 'STATUS.SUCCESS'));
     };
   }
 
@@ -168,13 +170,13 @@ export class EntityRepository<T extends DataObjectWithID> {
   protected async _getRecords(
     entity: AppEntity,
     hostName: string,
-    qbToken: string,
+    token: string,
     query?: string,
   ): Promise<T[]> {
     const result = await QuickbaseRepository.getRecords(
       entity.tableId,
       hostName,
-      qbToken,
+      token,
       this._fieldArray(entity.dataMapper),
       query || '',
     );
@@ -194,7 +196,7 @@ export class EntityRepository<T extends DataObjectWithID> {
       this._entityClass,
       resultStructed,
     )) as T[];
-    console.log('RECORDS',query,  resultValidated);
+    console.log('RECORDS', query, resultValidated);
     return resultValidated;
   }
 
