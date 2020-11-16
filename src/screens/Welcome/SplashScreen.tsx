@@ -32,9 +32,18 @@ export function SplashScreen(): React.ReactElement {
           fontSize: 22,
           fontWeight: 'bold',
           color: 'white',
-          marginTop: 8,
+          marginTop: 14,
         }}>
-        AI powered app builder
+        AI powered Quick Base®
+      </Text>
+      <Text
+        style={{
+          fontSize: 22,
+          fontWeight: 'bold',
+          color: 'white',
+          marginTop: 2,
+        }}>
+        App Builder
       </Text>
       <View style={{...styles.button, paddingTop: 50}}>
         <Button

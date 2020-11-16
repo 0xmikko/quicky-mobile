@@ -27,9 +27,9 @@ export function DMDetailsScreen({type}: DMDataScreenProps): React.ReactElement {
   }, [entity?.additionalFields]);
 
   if (entity && data) {
-    entity.additionalFields.map(
-      (field) => (data[field] = entity.dataMapper[field].fieldType),
-    );
+    // entity.additionalFields.map(
+    //   (field) => (data[field] = entity.dataMapper[field].fieldType),
+    // );
     data['additionalFields'] = entity.additionalFields;
   }
 

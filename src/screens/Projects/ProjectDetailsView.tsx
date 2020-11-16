@@ -3,10 +3,9 @@
  */
 
 import React from 'react';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {Icon, ListItem, Text} from 'react-native-elements';
 import {Project} from '../../entities/project';
-import {commonStyles} from '../../styles';
 import {CircleButtonProps} from '../../components/CircleButtons/CircleButton';
 import {CircleButtonBlock} from '../../components/CircleButtons/CircleButtonBlock';
 import {DataListItem} from '../../components/DataListItem';
@@ -61,15 +60,11 @@ export function ProjectDetailsView({
         <DataListItem name={'Status'} value={data.status} />
         <DataListItem
           name={'Starting date'}
-          value={moment(data.startDate * 1000)
-            .format('YYYY-MM-DD')
-            .toString()}
+          value={moment(data.startDate).format('YYYY-MM-DD').toString()}
         />
         <DataListItem
           name={'Finishing date'}
-          value={moment(data.finishDate * 1000)
-            .format('YYYY-MM-DD')
-            .toString()}
+          value={moment(data.finishDate).format('YYYY-MM-DD').toString()}
         />
         <DataExtraFields data={data} />
       </View>
