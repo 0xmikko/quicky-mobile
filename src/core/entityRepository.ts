@@ -54,6 +54,8 @@ export class EntityRepository<T extends DataObjectWithID> {
 
   getListAction(
     opHash: string,
+    foreignKeyName?: string,
+    foreignKeyId?: string,
   ): ThunkAction<void, RootState, unknown, Action<string>> {
     return async (dispatch, getState) => {
       const app = getState().app;
@@ -83,7 +85,24 @@ export class EntityRepository<T extends DataObjectWithID> {
         return;
       }
 
-      const resultValidated = await this._getRecords(entity, hostName, token);
+      let query = '';
+
+      if (foreignKeyName && foreignKeyId) {
+        const fieldEntity = Object.entries(entity.dataMapper).filter(
+          (e) => e[1].label === foreignKeyName,
+        );
+        if (fieldEntity.length === 0)
+          throw new Error('No foreign key was found');
+        const fieldNum = fieldEntity[0][0];
+        query = `{${fieldNum}.EX.${foreignKeyId}`;
+      }
+
+      const resultValidated = await this._getRecords(
+        entity,
+        hostName,
+        token,
+        query,
+      );
 
       dispatch({
         type: this.prefix + LIST_SUCCESS,
@@ -107,34 +126,25 @@ export class EntityRepository<T extends DataObjectWithID> {
       const {hostName, token} = getState().auth;
       const entity = app.entitiesMap[this._type];
 
-      if (!entity.isDeployed) {
-        dispatch({
-          type: this.prefix + DETAIL_SUCCESS,
-          payload: this.getSampleDetailsData(entity.dataMapper, id),
-        });
-        dispatch(updateStatus(opHash, 'STATUS.SUCCESS'));
-
-        return;
-      }
       if (hostName === undefined) {
         dispatch(
           updateStatus(opHash, 'STATUS.FAILURE', 'Host name is not set'),
         );
         return;
       }
-      if (token === undefined) {
+      if (qbToken === undefined) {
         dispatch(
           updateStatus(opHash, 'STATUS.FAILURE', 'User token is not set'),
         );
         return;
       }
 
-      const singleQuery = `<rid>1</rid>`;
+      const singleQuery = `{'3'.EX.'${id}'}`;
 
       const resultValidated = await this._getRecords(
         entity,
         hostName,
-        token,
+        qbToken,
         singleQuery,
       );
 
@@ -147,7 +157,10 @@ export class EntityRepository<T extends DataObjectWithID> {
 
       dispatch({
         type: this.prefix + DETAIL_SUCCESS,
-        payload: resultValidated[0],
+        payload: {
+          ...resultValidated[0],
+          id,
+        },
       });
       dispatch(updateStatus(opHash, 'STATUS.SUCCESS'));
     };

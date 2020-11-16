@@ -13,11 +13,7 @@ import {largeTitleStyles} from '../../styles';
 
 const Stack = createNativeStackNavigator();
 
-export type SettingsStackParamList = {
-  ChangeNameScreen: {data: Profile};
-};
-
-export const SettingsStack: React.FC = () => {
+export function SettingsStack(): React.ReactElement {
   const dispatch = useDispatch();
   return (
     <Stack.Navigator>
@@ -26,16 +22,9 @@ export const SettingsStack: React.FC = () => {
         component={SettingsScreen}
         options={{
           title: 'Settings',
-          headerRight: () => (
-            <Button
-              onPress={() => dispatch(actions.auth.logout())}
-              title={'Logout'}
-              type="clear"
-            />
-          ),
           ...largeTitleStyles,
         }}
       />
     </Stack.Navigator>
   );
-};
+}

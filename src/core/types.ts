@@ -2,11 +2,12 @@
  * Copyright (c) 2020, Mikael Lazarev
  */
 
-export type EntityType = 'Contact' | 'Project' | 'Setting';
+export type EntityType = 'Contact' | 'Project' | 'Task' | 'Setting';
 
 export const entityTypesList: Array<EntityType> = [
   'Contact',
   'Project',
+  'Task',
   // 'Setting',
 ];
 

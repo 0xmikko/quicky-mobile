@@ -2,11 +2,11 @@
  * Copyright (c) 2020, Mikael Lazarev
  */
 
-import {DataObjectWithID,} from 'redux-data-connect';
+import {DataObjectWithID} from 'redux-data-connect';
 import {DetailsViewComponent, EntityType, ListItemComponent} from './types';
 import {EntityManagerI} from './entityManagerI';
 import {EntityRepository} from './entityRepository';
-import {ClassType} from "class-transformer-validator";
+import {ClassType} from 'class-transformer-validator';
 
 export abstract class EntityManager<T extends DataObjectWithID>
   extends EntityRepository<T>

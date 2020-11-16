@@ -3,10 +3,11 @@
  */
 
 import {EntityType} from './types';
-import {ProjectDataManager} from '../entities/project';
 import {EntityManager} from './entityManager';
-import {EntityManagerI} from "./entityManagerI";
-import {ContactDataManager} from "../entities/contactManager";
+import {EntityManagerI} from './entityManagerI';
+import {ContactDataManager} from '../entities/contactManager';
+import {ProjectDataManager} from '../entities/projectManager';
+import {TaskDataManager} from '../entities/taskManager';
 
 export class AppDataManager {
   protected static _managers: Map<EntityType, EntityManager<any>> = new Map<
@@ -30,6 +31,8 @@ export class AppDataManager {
         return new ProjectDataManager();
       case 'Contact':
         return new ContactDataManager();
+      case 'Task':
+        return new TaskDataManager();
       default:
         throw new Error("Entity type doesn't exist");
       // case 'Setting':
