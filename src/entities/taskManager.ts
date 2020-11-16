@@ -11,22 +11,7 @@ import {Task} from './task';
 export class TaskDataManager extends EntityManager<Task> {
   constructor() {
     super('Task', Task, TaskListItem, TaskDetailsView);
-    this._sampleData = [
-      {
-        id: '0',
-        name: 'Setup facebook campaign',
-        description: '',
-        status: 'In progress',
-        deadline: Date.parse('2020-11-16') / 1000,
-      },
-      {
-        id: '1',
-        name: 'QB Hackathon',
-        description: '',
-        status: 'In progress',
-        deadline: Date.parse('2020-11-16') / 1000,
-      },
-    ];
+    this._sampleData = [];
   }
 
   search(data: Task[], search: string): Task[] {

@@ -3,10 +3,9 @@
  */
 
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {View} from 'react-native';
 import {Text} from 'react-native-elements';
 import {Task} from '../../entities/task';
-import {commonStyles} from '../../styles';
 import {CircleButtonProps} from '../../components/CircleButtons/CircleButton';
 import {CircleButtonBlock} from '../../components/CircleButtons/CircleButtonBlock';
 import {DataListItem} from '../../components/DataListItem';
@@ -24,7 +23,7 @@ export function TaskDetailsView({
     {icon: 'schedule', title: 'Postpone'},
   ];
   return (
-    <SafeAreaView style={commonStyles.safeAreaContainer}>
+    <>
       <View style={{alignItems: 'center', paddingTop: 20, width: '100%'}}>
         <Text h2 style={{marginTop: 15, paddingBottom: 15}}>
           {data.name}
@@ -36,12 +35,10 @@ export function TaskDetailsView({
         <DataListItem name={'Description'} value={data.description} />
         <DataListItem
           name={'Deadline'}
-          value={moment(data.deadline * 1000)
-            .format('YYYY-MM-DD')
-            .toString()}
+          value={moment(data.deadline).format('YYYY-MM-DD hh:mm').toString()}
         />
         <DataExtraFields data={data} />
       </View>
-    </SafeAreaView>
+    </>
   );
 }

@@ -21,7 +21,7 @@ export function TaskListItem({
         <Icon name={'ios-radio-button-off'} type={'ionicon'} />
         <ListItem.Content>
           <ListItem.Title>{title}</ListItem.Title>
-          <ListItem.Subtitle>{moment(data.deadline * 1000).format('YYYY-MM-DD hh:mm').toString()}</ListItem.Subtitle>
+          <ListItem.Subtitle>{moment(data.deadline).format('YYYY-MM-DD hh:mm').toString()}</ListItem.Subtitle>
         </ListItem.Content>
         <ListItem.Chevron />
       </ListItem>
