@@ -35,7 +35,7 @@ export function SettingsScreen(): React.ReactElement {
           }}
         />
         <Text style={{marginTop: 5, fontSize: 18, fontWeight: 'bold'}}>
-          Quicky for Quick Base
+          Quicky for Quick Base®
         </Text>
         <Text style={{marginBottom: 15}}>ver 1.0</Text>
       </View>

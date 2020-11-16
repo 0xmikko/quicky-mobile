@@ -3,16 +3,13 @@
  */
 
 import React from 'react';
-import {SafeAreaView, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import {Avatar, Icon, ListItem, Text} from 'react-native-elements';
 import {Contact} from '../../entities/contact';
-import {commonStyles} from '../../styles';
 import {CircleButtonProps} from '../../components/CircleButtons/CircleButton';
 import {CircleButtonBlock} from '../../components/CircleButtons/CircleButtonBlock';
 import {DataListItem} from '../../components/DataListItem';
 import {DataExtraFields} from '../../components/DataExtraFields';
-import {useSelector} from 'react-redux';
-import {appSelector} from '../../store/app';
 import {useNavigation} from '@react-navigation/native';
 
 export interface ContactDetailsViewProps {
@@ -52,36 +49,34 @@ export function ContactDetailsView({
 
   const conntectedScreensRendered =
     connectedScreens.length > 0 ? (
-      <View style={{marginTop: '15px'}}>{connectedScreens}</View>
+      <View style={{marginTop: 15}}>{connectedScreens}</View>
     ) : (
       <View />
     );
 
   return (
-    <SafeAreaView style={commonStyles.safeAreaContainer}>
-      <View style={{alignItems: 'center', paddingTop: '20px', width: '100%'}}>
+    <View style={{width: '100%'}}>
+      <View style={{alignItems: 'center', paddingTop: 20, width: '100%'}}>
         <Avatar
           title={data.firstName.slice(0, 1) + data.lastName.slice(0, 1)}
           size={'xlarge'}
           containerStyle={{backgroundColor: '#999999'}}
           rounded
         />
-        <Text h2 style={{marginTop: '15px', paddingBottom: '5px'}}>
+        <Text h2 style={{marginTop: 15, paddingBottom: 5}}>
           {data.firstName + ' ' + data.lastName}
         </Text>
-        <Text style={{fontSize: 16, paddingBottom: '15px'}}>
-          {data.company}
-        </Text>
+        <Text style={{fontSize: 16, paddingBottom: 15}}>{data.company}</Text>
         <CircleButtonBlock data={actions} />
       </View>
 
-      <View style={{marginTop: '25px'}}>
-        <DataListItem name={'phone'} value={data.phone} />
-        <DataListItem name={'mobile'} value={data.mobile} />
-        <DataListItem name={'email'} value={data.email} />
+      <View style={{marginTop: 25, width: '100%'}}>
+        <DataListItem name={'phone'} value={data.phone} key={1} />
+        <DataListItem name={'mobile'} value={data.mobile} key={2} />
+        <DataListItem name={'email'} value={data.email} key={3} />
         <DataExtraFields data={data} />
       </View>
       {conntectedScreensRendered}
-    </SafeAreaView>
+    </View>
   );
 }

@@ -3,9 +3,9 @@
  * Copyright (c) 2020. Mikhail Lazarev
  */
 
-import React from "react";
-import {CircleButton, CircleButtonProps} from "./CircleButton";
-import {View} from "react-native";
+import React from 'react';
+import {CircleButton, CircleButtonProps} from './CircleButton';
+import {View} from 'react-native';
 
 export interface CircleButtonBlockProps {
   data: Array<CircleButtonProps>;
@@ -17,12 +17,16 @@ export function CircleButtonBlock({
   return (
     <View
       style={{
-        justifyContent: "center",
-          flexDirection: "row"
-      }}
-    >
+        justifyContent: 'center',
+        flexDirection: 'row',
+      }}>
       {data.map((action, index) => (
-        <CircleButton icon={action.icon} title={action.title} onClick={action.onClick} key={index + "CButton"}/>
+        <CircleButton
+          icon={action.icon}
+          title={action.title}
+          onClick={action.onClick}
+          key={index + 'CButton'}
+        />
       ))}
     </View>
   );

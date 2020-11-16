@@ -17,8 +17,8 @@ export function CircleButton({
     <View
       style={{
         alignItems: 'center',
-        marginLeft: '10px',
-        marginRight: '10px',
+        marginLeft: 10,
+        marginRight: 10,
       }}>
       <Avatar
         icon={{name: icon, type: 'material'}}
@@ -26,7 +26,7 @@ export function CircleButton({
         containerStyle={{backgroundColor: '#0083FF'}}
         rounded
       />
-      <Text style={{marginTop: '5px'}}>{title}</Text>
+      <Text style={{marginTop: 5}}>{title}</Text>
     </View>
   );
 }

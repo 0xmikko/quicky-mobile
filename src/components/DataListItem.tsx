@@ -20,12 +20,8 @@ export function DataListItem({
   return (
     <TouchableOpacity onPress={onSelect} style={{marginTop: -1}}>
       <View style={styles.container}>
-        <View style={styles.textContainer}>
-          <View>
-            <Text>{name}</Text>
-            <Text h4>{value}</Text>
-          </View>
-        </View>
+        <Text>{name}</Text>
+        <Text h4>{value || ''}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -33,7 +29,6 @@ export function DataListItem({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     width: '100%',
     paddingTop: 15,
     paddingBottom: 15,
@@ -41,21 +36,9 @@ const styles = StyleSheet.create({
     paddingRight: 5,
     marginTop: 1,
     backgroundColor: 'white',
-    flexDirection: 'row',
     alignContent: 'space-between',
     borderTopWidth: 1,
     borderBottomWidth: 1,
     borderColor: '#e2e2e2',
-  },
-  textContainer: {
-    paddingLeft: 15,
-    paddingRight: 20,
-    flex: 1,
-    alignContent: 'flex-start',
-  },
-  tagContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    marginTop: 5,
   },
 });

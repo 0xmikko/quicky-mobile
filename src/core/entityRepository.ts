@@ -93,8 +93,8 @@ export class EntityRepository<T extends DataObjectWithID> {
         );
         if (fieldEntity.length === 0)
           throw new Error('No foreign key was found');
-        const fieldNum = fieldEntity[0][0];
-        query = `{${fieldNum}.EX.${foreignKeyId}`;
+        const fieldNum = fieldEntity[0][1].id;
+        query = `{'${fieldNum}'.EX.'${foreignKeyId}'}`;
       }
 
       const resultValidated = await this._getRecords(
@@ -132,7 +132,7 @@ export class EntityRepository<T extends DataObjectWithID> {
         );
         return;
       }
-      if (qbToken === undefined) {
+      if (token === undefined) {
         dispatch(
           updateStatus(opHash, 'STATUS.FAILURE', 'User token is not set'),
         );
@@ -144,7 +144,7 @@ export class EntityRepository<T extends DataObjectWithID> {
       const resultValidated = await this._getRecords(
         entity,
         hostName,
-        qbToken,
+        token,
         singleQuery,
       );
 
